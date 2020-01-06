@@ -1,0 +1,28 @@
+{% extends 'Base.html' %}
+
+{% block title %} HomePage_CRUD_Operations {% endblock %}
+
+{% block content %}
+
+<div>
+    <h1><a href="{% url 'home' %}">Companies List</a></h1>
+</div>
+
+<div>
+    <a href="/create/">
+        <span>Add New Pic</span>
+        <ul>
+            {% for obj in orglist %}
+            <a href="{{ obj.get_absolute_url }}"><h3>{{ obj.id }}.{{ obj.company_name }}</h3>
+                {% if obj.company_logo %}
+                <img src="{{ obj.company_logo.url }}" />
+                {% endif %}
+            </a>
+            <a href="{% url 'update' id=obj.id %}">Update</a>
+            <a href="{% url 'delete' id=obj.id %}">Delete</a>
+            {% endfor %}
+        </ul>
+    </a>
+</div>
+
+{% endblock %}
